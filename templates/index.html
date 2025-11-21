@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clasificador de Flores - IA</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilos.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🌺 Clasificador de Flores con IA</h1>
+            <p class="subtitle">Sube una imagen de una flor y descubre qué tipo es</p>
+        </header>
+
+        <main>
+            <div class="upload-section">
+                <div class="upload-area" id="uploadArea">
+                    <div class="upload-content">
+                        <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="17 8 12 3 7 8"></polyline>
+                            <line x1="12" y1="3" x2="12" y2="15"></line>
+                        </svg>
+                        <p class="upload-text">Arrastra una imagen aquí o haz clic para seleccionar</p>
+                        <p class="upload-hint">Formatos: JPG, PNG, WEBP (máx. 16MB)</p>
+                    </div>
+                    <input type="file" id="fileInput" accept="image/*" hidden>
+                </div>
+
+                <div class="preview-section" id="previewSection" style="display: none;">
+                    <div class="image-preview">
+                        <img id="previewImage" src="" alt="Vista previa">
+                        <button class="btn-remove" id="removeBtn">✕</button>
+                    </div>
+                    <button class="btn-analyze" id="analyzeBtn">
+                        <span class="btn-text">Analizar Imagen</span>
+                        <span class="btn-loader" style="display: none;"></span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="results-section" id="resultsSection" style="display: none;">
+                <div class="result-card">
+                    <h2>Resultado del Análisis</h2>
+                    <div class="result-image">
+                        <img id="resultImage" src="" alt="Imagen analizada">
+                    </div>
+                    <div class="result-info">
+                        <div class="result-main" id="resultMain">
+                            <h3 id="flowerName"></h3>
+                            <div class="confidence-bar">
+                                <div class="confidence-fill" id="confidenceFill"></div>
+                            </div>
+                            <p class="confidence-text" id="confidenceText"></p>
+                        </div>
+                        <div class="result-alert" id="resultAlert" style="display: none;">
+                            <p>⚠️ La confianza es baja. Esta podría no ser la clasificación correcta.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="top-predictions" id="topPredictions">
+                    <h3>Top 3 Predicciones</h3>
+                    <div class="predictions-list" id="predictionsList"></div>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="btn-new-image" id="btnNewImage">
+                        📷 Subir Nueva Imagen
+                    </button>
+                    <button class="btn-reanalyze" id="btnReanalyze">
+                        🔄 Volver a Analizar
+                    </button>
+                </div>
+            </div>
+
+            <div class="error-message" id="errorMessage" style="display: none;">
+                <p id="errorText"></p>
+            </div>
+        </main>
+
+        <footer>
+            <p>Clasificador entrenado con TensorFlow | Modelo: MobileNetV2</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
+
